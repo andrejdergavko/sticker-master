@@ -5,3 +5,8 @@ export enum Pages {
 export enum Routes {
   print = '/',
 }
+
+export enum Providers {
+  almik = 'almik',
+  arclow = 'arclow',
+}
