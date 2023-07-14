@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Divider from '@mui/material/Divider';
 import {
   faPrint,
+  faFile,
   type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +23,11 @@ const MENU_ITEMS: MenuItem[] = [
     label: 'Печать',
     icon: faPrint,
     href: Routes.print,
+  },
+  {
+    label: 'Выбор файла',
+    icon: faFile,
+    href: Routes.fileSelection,
   },
 ];
 
