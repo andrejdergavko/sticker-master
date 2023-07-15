@@ -6,8 +6,11 @@ import { Button } from '~components/ui/Button';
 import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
 import { PROVIDER_OPTIONS } from '~lib/constants';
+import useAttachments from '~lib/hooks/useAttachments';
 
 export default function FileSelection() {
+  // const { attachments } = useAttachments();
+
   return (
     <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
       <div className="px-4 py-3 bg-slate-50 ">
