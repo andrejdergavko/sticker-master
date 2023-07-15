@@ -12,6 +12,7 @@ import DateCell from '../cell-renderers/DateCell';
 interface FilesTableProps {
   data: IAttachment[];
   onRowParseClick: () => void;
+  isLoading?: boolean;
 }
 
 const columns: MRT_ColumnDef<IAttachment>[] = [
@@ -36,9 +37,14 @@ const columns: MRT_ColumnDef<IAttachment>[] = [
   },
 ];
 
-const FilesTable: FC<FilesTableProps> = ({ data, onRowParseClick }) => {
+const FilesTable: FC<FilesTableProps> = ({
+  data,
+  onRowParseClick,
+  isLoading = false,
+}) => {
   return (
     <MaterialReactTable
+      state={{ showProgressBars: isLoading }}
       columns={columns}
       data={data}
       enableDensityToggle={false}

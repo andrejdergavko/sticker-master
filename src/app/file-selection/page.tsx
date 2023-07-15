@@ -2,14 +2,13 @@
 import Divider from '@mui/material/Divider';
 
 import FilesTable from '~components/tables/files-table/FilesTable';
-import { Button } from '~components/ui/Button';
 import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
 import { PROVIDER_OPTIONS } from '~lib/constants';
 import useAttachments from '~lib/hooks/useAttachments';
 
 export default function FileSelection() {
-  // const { attachments } = useAttachments();
+  const { attachments = [], isLoading } = useAttachments();
 
   return (
     <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
@@ -56,42 +55,9 @@ export default function FileSelection() {
         </h6>
         <div className="rounded overflow-hidden ">
           <FilesTable
-            data={[
-              {
-                from: {
-                  name: 'Андрей Дергавко',
-                  address: 'andrejdergavko@gmail.com',
-                },
-                fileName: 'Кронавто.xls',
-                date: '2023-07-13T15:04:57.000Z',
-                bodyStructurePart: '2',
-                letterUid: 33244,
-                letterSeq: 14120,
-              },
-              {
-                from: {
-                  name: 'Андрей Дергавко',
-                  address: 'andrejdergavko@gmail.com',
-                },
-                fileName: 'Кронавто.xls',
-                date: '2023-07-13T15:04:57.000Z',
-                bodyStructurePart: '2',
-                letterUid: 33244,
-                letterSeq: 14120,
-              },
-              {
-                from: {
-                  name: 'Андрей Дергавко',
-                  address: 'andrejdergavko@gmail.com',
-                },
-                fileName: 'Кронавто.xls',
-                date: '2023-07-13T15:04:57.000Z',
-                bodyStructurePart: '2',
-                letterUid: 33244,
-                letterSeq: 14120,
-              },
-            ]}
+            data={attachments}
             onRowParseClick={() => {}}
+            isLoading={isLoading}
           />
         </div>
       </div>
