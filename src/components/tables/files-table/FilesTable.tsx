@@ -1,50 +1,35 @@
 'use client';
 import { FC, memo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, {
+  MRT_ColumnFiltersState,
+} from 'material-react-table';
 import { faPrint } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '~components/ui/Button';
 import { IAttachment } from '~app-types/entities';
 
-import DateCell from '../cell-renderers/DateCell';
+import { columns } from './config';
 
 interface FilesTableProps {
   data: IAttachment[];
   onRowParseClick: () => void;
   isLoading?: boolean;
+  filters?: MRT_ColumnFiltersState;
 }
-
-const columns: MRT_ColumnDef<IAttachment>[] = [
-  {
-    accessorKey: 'from.name',
-    header: 'Отправитель',
-  },
-  {
-    accessorKey: 'from.address',
-    header: 'Адрес',
-  },
-  {
-    accessorKey: 'date',
-    header: 'Дата',
-    Cell: ({ cell }) => <DateCell date={cell.getValue<string>()} />,
-  },
-  {
-    accessorKey: 'fileName',
-    header: 'Имя файла',
-    maxSize: 610,
-    minSize: 300,
-  },
-];
 
 const FilesTable: FC<FilesTableProps> = ({
   data,
   onRowParseClick,
   isLoading = false,
+  filters = [],
 }) => {
   return (
     <MaterialReactTable
-      state={{ showProgressBars: isLoading }}
+      state={{
+        showProgressBars: isLoading,
+        columnFilters: filters,
+      }}
       columns={columns}
       data={data}
       enableDensityToggle={false}

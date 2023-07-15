@@ -1,7 +1,10 @@
 'use client';
+import { useState } from 'react';
 import Divider from '@mui/material/Divider';
+import { SelectChangeEvent } from '@mui/material';
 
 import FilesTable from '~components/tables/files-table/FilesTable';
+import { Columns } from '~components/tables/files-table/config';
 import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
 import { PROVIDER_OPTIONS } from '~lib/constants';
@@ -9,6 +12,7 @@ import useAttachments from '~lib/hooks/useAttachments';
 
 export default function FileSelection() {
   const { attachments = [], isLoading } = useAttachments();
+  const [providerEmail, setProviderEmail] = useState('');
 
   return (
     <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
@@ -21,26 +25,27 @@ export default function FileSelection() {
         </h6>
 
         <div className="mt-2 flex flex-wrap">
-          <FormControl
-            className="min-w-[200px] w-2/12 px-4 relative mb-3"
-            helperTextId="bank-error-text"
-          >
+          <FormControl className="min-w-[200px] w-2/12 px-4 relative mb-3">
             <label
               className="block uppercase text-slate-600 text-xs font-bold mb-2"
-              htmlFor="bank-select-label"
+              htmlFor="provider-select-label"
             >
               Поставщик
             </label>
             <Select
-              labelId="bank-select-label"
-              aria-describedby="bank-error-text"
-              id="bank-select"
-              name="bank"
-              // value={values.provider}
-              // onChange={handleChange}
+              labelId="provider-select-label"
+              id="provider-select"
+              name="provider"
+              value={providerEmail}
+              onChange={(e) => {
+                setProviderEmail(e.target.value);
+              }}
             >
-              {PROVIDER_OPTIONS.map(({ id, label }) => (
-                <MenuItem key={id} value={id}>
+              <MenuItem key="all" value={''}>
+                Все
+              </MenuItem>
+              {PROVIDER_OPTIONS.map(({ label, email }) => (
+                <MenuItem key={email} value={email}>
                   {label}
                 </MenuItem>
               ))}
@@ -53,11 +58,12 @@ export default function FileSelection() {
         <h6 className="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
           Файлы
         </h6>
-        <div className="rounded overflow-hidden ">
+        <div className="rounded overflow-hidden">
           <FilesTable
             data={attachments}
             onRowParseClick={() => {}}
             isLoading={isLoading}
+            filters={[{ id: Columns.emailAddress, value: providerEmail }]}
           />
         </div>
       </div>
