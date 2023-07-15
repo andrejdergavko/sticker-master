@@ -11,7 +11,7 @@ interface IAttachment {
     address: string;
   };
   fileName: string;
-  date: Date;
+  date: string;
   bodyStructurePart: string;
   letterUid: number;
   letterSeq: number;
