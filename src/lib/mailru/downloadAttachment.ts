@@ -1,5 +1,5 @@
 import { ImapFlow } from 'imapflow';
-import fs from 'fs';
+import fse from 'fs-extra';
 
 import { ATTACHMENTS_FOLDER_PATH } from '~lib/constants';
 
@@ -32,11 +32,11 @@ const downloadAttachment = async (
 
     const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
-    if (!fs.existsSync(ATTACHMENTS_FOLDER_PATH)) {
-      fs.mkdirSync(ATTACHMENTS_FOLDER_PATH);
+    if (!fse.existsSync(ATTACHMENTS_FOLDER_PATH)) {
+      fse.mkdirSync(ATTACHMENTS_FOLDER_PATH);
     }
 
-    const stream = fs.createWriteStream(filePath);
+    const stream = fse.createWriteStream(filePath);
 
     content.pipe(stream);
 
