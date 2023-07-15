@@ -1,5 +1,7 @@
 import { Pages, Providers, Routes } from './enums';
 
+export const ATTACHMENTS_FOLDER_PATH = 'attachments/';
+
 export const PAGE_NAMES: { [key in Pages]: string } = {
   [Pages.print]: 'Печать',
   [Pages.fileSelection]: 'Выбор файла',
