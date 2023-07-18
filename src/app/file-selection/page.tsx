@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Divider from '@mui/material/Divider';
-import { SelectChangeEvent } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 import FilesTable from '~components/tables/files-table/FilesTable';
 import { Columns } from '~components/tables/files-table/config';
@@ -11,9 +11,19 @@ import { PROVIDER_OPTIONS } from '~lib/constants';
 import useAttachments from '~lib/hooks/useAttachments';
 import useParseAttachment from '~lib/hooks/useParseAttachment';
 import { IAttachment } from '~app-types/entities';
+import { useProductsStore } from '~store/products';
+import { Routes } from '~lib/enums';
 
 export default function FileSelection() {
-  const { products = [], parseAttachment, isParsing } = useParseAttachment();
+  const router = useRouter();
+  const { setProducts } = useProductsStore();
+
+  const { parseAttachment, isParsing } = useParseAttachment({
+    onSuccess(data) {
+      setProducts(data);
+      router.push(Routes.print);
+    },
+  });
   const { attachments = [], isLoading } = useAttachments();
   const [providerEmail, setProviderEmail] = useState('');
 
@@ -25,9 +35,6 @@ export default function FileSelection() {
       letterSeq: attachment.letterSeq,
     });
   };
-
-  console.log('isParsing', isParsing); // <--
-  console.log('products', products); // <--
 
   return (
     <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
@@ -77,6 +84,7 @@ export default function FileSelection() {
           <FilesTable
             data={attachments}
             onParseClick={handleAttachmentParse}
+            isParsing={isParsing}
             isLoading={isLoading}
             filters={[{ id: Columns.emailAddress, value: providerEmail }]}
           />

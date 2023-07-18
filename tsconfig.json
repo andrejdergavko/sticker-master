@@ -23,6 +23,7 @@
     "paths": {
       "~lib/*": ["src/lib/*"],
       "~components/*": ["src/components/*"],
+      "~store/*": ["src/store/*"],
       "~app-types/*": ["src/types/*"],
       "~utils/*": ["src/utils/*"],
       "~api/*": ["src/app/api/*"]

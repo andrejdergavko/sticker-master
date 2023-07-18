@@ -40,6 +40,7 @@ export const getAttachments = async (
 
       attachments.forEach((attachment) => {
         result.push({
+          id: attachment.id,
           // @ts-ignore
           from: message.envelope.from[0],
           // @ts-ignore not correct dispositionParameters field type in MessageStructureObject
