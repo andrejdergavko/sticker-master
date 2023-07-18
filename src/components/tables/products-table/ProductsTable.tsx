@@ -1,19 +1,58 @@
 import { FC, memo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '~components/ui/Button';
 import { IProduct } from '~app-types/entities';
 
-import { columns } from './config';
+import EditableQuantityCell from '../cell-renderers/EditableQuantityCell';
 
 type ProductsTablePropsT = {
   data: IProduct[];
-  onRowsDelete: (rowUuids: string[]) => void;
+  onDelete: (rowUuids: string[]) => void;
+  onEdit: (rowUuid: string, newValues: Partial<IProduct>) => void;
 };
 
-const ProductsTable: FC<ProductsTablePropsT> = ({ data, onRowsDelete }) => {
+const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
+  const columns: MRT_ColumnDef<IProduct>[] = [
+    {
+      accessorKey: 'article',
+      header: 'Артикул',
+      minSize: 150,
+    },
+    {
+      accessorKey: 'productName',
+      header: 'Название',
+      minSize: 310,
+    },
+    {
+      accessorKey: 'quantity',
+      header: 'Количество',
+      maxSize: 100,
+      Cell({ cell }) {
+        return (
+          <EditableQuantityCell
+            quantity={cell.getValue<number>()}
+            onChange={(newValue) => {
+              onEdit(cell.row.original.uuid, { quantity: newValue });
+            }}
+          />
+        );
+      },
+    },
+    {
+      accessorKey: 'price',
+      header: 'Цена',
+      maxSize: 60,
+    },
+    {
+      accessorKey: 'amount',
+      header: 'Сумма',
+      maxSize: 66,
+    },
+  ];
+
   return (
     <MaterialReactTable
       columns={columns}
@@ -25,7 +64,6 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onRowsDelete }) => {
       enableColumnActions={false}
       initialState={{
         density: 'comfortable',
-        sorting: [{ id: 'date', desc: true }],
         pagination: { pageSize: 50, pageIndex: 0 },
         // @ts-ignore problem in the material-react-table lib
         density: 'compact',
@@ -46,9 +84,7 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onRowsDelete }) => {
             const uuidsToDelete = table
               .getSelectedRowModel()
               .rows.map((row) => row.original?.uuid);
-
-            onRowsDelete(uuidsToDelete);
-
+            onDelete(uuidsToDelete);
             table.resetRowSelection();
           }}
           variant="contained"
@@ -74,7 +110,7 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onRowsDelete }) => {
           className="w-1 p-2 mx-3 min-w-fit"
           onClick={(e) => {
             e.stopPropagation();
-            onRowsDelete([row.original?.uuid]);
+            onDelete([row.original?.uuid]);
           }}
         >
           <FontAwesomeIcon icon={faTrash} size="sm" />

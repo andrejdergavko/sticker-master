@@ -6,11 +6,12 @@ type Props = ComponentProps<typeof InputBase>;
 export const TextField: FC<Props> = (props) => {
   return (
     <InputBase
+      {...props}
       classes={{
         root: 'text-sm px-3 h-11 font-sans rounded relative bg-slate-100 shadow',
         error: 'border border-red-400 border-solid',
+        ...props.classes,
       }}
-      {...props}
     />
   );
 };
