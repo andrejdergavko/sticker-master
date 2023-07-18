@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 // import { useSession, signOut } from 'next-auth/react';
 
 import { PAGE_NAMES_BY_ROUTE } from '~lib/constants';
-// import { Button } from '~components/ui/Button';
+import { Button } from '~components/ui/Button';
 
 const Header: FC = () => {
   const pathname = usePathname();
@@ -16,23 +16,23 @@ const Header: FC = () => {
 
   return (
     <div className="w-full pb-[370px] bg-slate-700">
-      <div className=" py-7 px-14 flex justify-between items-center">
+      <div className=" py-6 px-14 flex justify-between items-center">
         <div className="uppercase font-bold text-slate-50 text-sm">
           {PAGE_NAMES_BY_ROUTE[pathname]}
         </div>
 
         <div className="flex">
-          <button
+          <Button
             className="mr-2 px-4 text-white normal-case"
-            // variant="text"
-            // size="medium"
-            // onClick={() => signOut()}
+            variant="text"
+            size="medium"
+            onClick={() => {}}
           >
             Sign out
-          </button>
+          </Button>
           <Image
-            width={48}
-            height={48}
+            width={42}
+            height={42}
             className="rounded-full relative"
             // src={user?.image || '/no-avatar.jpg'}
             src={'/no-avatar.jpg'}

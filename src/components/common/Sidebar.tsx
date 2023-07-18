@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Divider from '@mui/material/Divider';
 import {
   faPrint,
+  faFile,
   type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,13 +24,18 @@ const MENU_ITEMS: MenuItem[] = [
     icon: faPrint,
     href: Routes.print,
   },
+  {
+    label: 'Выбор файла',
+    icon: faFile,
+    href: Routes.fileSelection,
+  },
 ];
 
 const Sidebar: FC = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="w-[260px] px-6 py-4 shadow-xl">
+    <aside className="w-[260px] px-6 py-6 shadow-xl">
       <div className="pt-3 pb-1">
         <Link href="/" className="font-bold uppercase">
           Sticker Master
@@ -60,7 +66,7 @@ const Sidebar: FC = () => {
         ))}
       </ul>
 
-      <Divider className="my-4 mt-6" />
+      <Divider className="my-4" />
     </aside>
   );
 };
