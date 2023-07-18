@@ -3,6 +3,8 @@ import useSWRMutation, { SWRMutationConfiguration } from 'swr/mutation';
 import { ParseAttachmentArgsT } from '~api/mailru/parse-attachment/route';
 import { IProduct } from '~app-types/entities';
 
+import { useProductsStore } from 'src/store/products';
+
 const useParseAttachment = (
   config?: SWRMutationConfiguration<
     IProduct[],
@@ -11,6 +13,8 @@ const useParseAttachment = (
     ParseAttachmentArgsT
   >
 ) => {
+  const { setProducts } = useProductsStore();
+
   const { trigger, data, error, isMutating } = useSWRMutation<
     IProduct[],
     any,
@@ -33,7 +37,13 @@ const useParseAttachment = (
 
       return await res.json();
     },
-    config
+    {
+      ...config,
+      onSuccess(data, key, config) {
+        setProducts(data);
+        config.onSuccess && config.onSuccess(data, key, config);
+      },
+    }
   );
 
   return {
