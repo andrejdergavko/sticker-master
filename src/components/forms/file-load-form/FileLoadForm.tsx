@@ -10,7 +10,7 @@ import { PROVIDER_OPTIONS } from '~lib/constants';
 
 import { initialValues, validationSchema, type IValues } from './config';
 
-const ImportForm: FC = () => {
+const FileLoadForm: FC = () => {
   const {
     handleSubmit,
     values,
@@ -128,4 +128,4 @@ const ImportForm: FC = () => {
   );
 };
 
-export default ImportForm;
+export default FileLoadForm;

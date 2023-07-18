@@ -9,10 +9,25 @@ import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
 import { PROVIDER_OPTIONS } from '~lib/constants';
 import useAttachments from '~lib/hooks/useAttachments';
+import useParseAttachment from '~lib/hooks/useParseAttachment';
+import { IAttachment } from '~app-types/entities';
 
 export default function FileSelection() {
+  const { products = [], parseAttachment, isParsing } = useParseAttachment();
   const { attachments = [], isLoading } = useAttachments();
   const [providerEmail, setProviderEmail] = useState('');
+
+  const handleAttachmentParse = (attachment: IAttachment) => {
+    parseAttachment({
+      bodyStructurePart: attachment.bodyStructurePart,
+      fileName: attachment.fileName,
+      provider: attachment.from.address,
+      letterSeq: attachment.letterSeq,
+    });
+  };
+
+  console.log('isParsing', isParsing); // <--
+  console.log('products', products); // <--
 
   return (
     <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
@@ -61,7 +76,7 @@ export default function FileSelection() {
         <div className="rounded overflow-hidden">
           <FilesTable
             data={attachments}
-            onRowParseClick={() => {}}
+            onParseClick={handleAttachmentParse}
             isLoading={isLoading}
             filters={[{ id: Columns.emailAddress, value: providerEmail }]}
           />

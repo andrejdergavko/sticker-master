@@ -13,14 +13,14 @@ import { columns } from './config';
 
 interface FilesTableProps {
   data: IAttachment[];
-  onRowParseClick: () => void;
+  onParseClick: (attachment: IAttachment) => void;
   isLoading?: boolean;
   filters?: MRT_ColumnFiltersState;
 }
 
 const FilesTable: FC<FilesTableProps> = ({
   data,
-  onRowParseClick,
+  onParseClick,
   isLoading = false,
   filters = [],
 }) => {
@@ -55,7 +55,7 @@ const FilesTable: FC<FilesTableProps> = ({
         <Button
           className="w-1 p-2 mx-3 min-w-fit"
           onClick={() => {
-            // onRowsDelete([row.original?.uuid]);
+            onParseClick(row.original);
           }}
         >
           <FontAwesomeIcon icon={faPrint} size="lg" />

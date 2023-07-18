@@ -5,7 +5,8 @@ export interface IProduct {
   provider: string;
 }
 
-interface IAttachment {
+export interface IAttachment {
+  uuid: string;
   from: {
     name: string;
     address: string;
@@ -15,4 +16,13 @@ interface IAttachment {
   bodyStructurePart: string;
   letterUid: number;
   letterSeq: number;
+}
+
+export interface IProduct {
+  uuid: string;
+  article?: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  amount: number;
 }
