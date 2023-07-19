@@ -9,8 +9,8 @@ const useAttachments = (config?: SWRConfiguration) => {
       const res = await fetch(url, { cache: 'no-store' });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error?.message);
+        const errorMessage = await res.json();
+        throw new Error(errorMessage);
       }
 
       return res.json();
