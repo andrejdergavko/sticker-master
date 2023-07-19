@@ -1,10 +1,3 @@
-export interface IProduct {
-  uuid: string;
-  description: string;
-  amount: number;
-  provider: string;
-}
-
 export interface IAttachment {
   id: string;
   from: {
@@ -19,7 +12,7 @@ export interface IAttachment {
 }
 
 export interface IProduct {
-  uuid: string;
+  id: string;
   article?: string;
   productName: string;
   quantity: number;

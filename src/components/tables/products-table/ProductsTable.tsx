@@ -10,8 +10,8 @@ import EditableQuantityCell from '../cell-renderers/EditableQuantityCell';
 
 type ProductsTablePropsT = {
   data: IProduct[];
-  onDelete: (rowUuids: string[]) => void;
-  onEdit: (rowUuid: string, newValues: Partial<IProduct>) => void;
+  onDelete: (rowIds: string[]) => void;
+  onEdit: (rowId: string, newValues: Partial<IProduct>) => void;
 };
 
 const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
@@ -35,7 +35,7 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
           <EditableQuantityCell
             quantity={cell.getValue<number>()}
             onChange={(newValue) => {
-              onEdit(cell.row.original.uuid, { quantity: newValue });
+              onEdit(cell.row.original.id, { quantity: newValue });
             }}
           />
         );
@@ -81,10 +81,10 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
             !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
           }
           onClick={() => {
-            const uuidsToDelete = table
+            const idsToDelete = table
               .getSelectedRowModel()
-              .rows.map((row) => row.original?.uuid);
-            onDelete(uuidsToDelete);
+              .rows.map((row) => row.original?.id);
+            onDelete(idsToDelete);
             table.resetRowSelection();
           }}
           variant="contained"
@@ -110,7 +110,7 @@ const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
           className="w-1 p-2 mx-3 min-w-fit"
           onClick={(e) => {
             e.stopPropagation();
-            onDelete([row.original?.uuid]);
+            onDelete([row.original?.id]);
           }}
         >
           <FontAwesomeIcon icon={faTrash} size="sm" />
