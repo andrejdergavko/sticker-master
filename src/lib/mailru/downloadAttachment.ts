@@ -7,8 +7,8 @@ const downloadAttachment = async (
   letterSeq: number,
   bodyStructurePart: string,
   fileName: string,
-  userEmail: string = 'andrej94@list.ru',
-  password: string = 'tjE4rYU5kjvRLsdb8fDQ'
+  userEmail: string = process.env.USER_EMAIL as string,
+  password: string = process.env.USER_PASSWORD as string
 ) => {
   const client = new ImapFlow({
     host: 'imap.mail.ru',
