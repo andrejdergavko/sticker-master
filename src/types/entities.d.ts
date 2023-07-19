@@ -6,7 +6,7 @@ export interface IProduct {
 }
 
 export interface IAttachment {
-  uuid: string;
+  id: string;
   from: {
     name: string;
     address: string;

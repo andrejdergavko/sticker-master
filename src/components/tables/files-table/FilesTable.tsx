@@ -1,5 +1,5 @@
 'use client';
-import { FC, memo } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 import MaterialReactTable, {
   MRT_ColumnFiltersState,
 } from 'material-react-table';
@@ -15,6 +15,7 @@ interface FilesTableProps {
   data: IAttachment[];
   onParseClick: (attachment: IAttachment) => void;
   isLoading?: boolean;
+  isParsing?: boolean;
   filters?: MRT_ColumnFiltersState;
 }
 
@@ -22,8 +23,17 @@ const FilesTable: FC<FilesTableProps> = ({
   data,
   onParseClick,
   isLoading = false,
+  isParsing = false,
   filters = [],
 }) => {
+  const [activeRowId, setActiveRowId] = useState('');
+
+  useEffect(() => {
+    if (isParsing === false) {
+      setActiveRowId('');
+    }
+  }, [isParsing]);
+
   return (
     <MaterialReactTable
       state={{
@@ -54,7 +64,10 @@ const FilesTable: FC<FilesTableProps> = ({
       renderRowActions={({ table, row }) => (
         <Button
           className="w-1 p-2 mx-3 min-w-fit"
+          loading={isParsing && activeRowId === row.original?.id}
+          disabled={isParsing && activeRowId !== row.original?.id}
           onClick={() => {
+            setActiveRowId(row.original?.id);
             onParseClick(row.original);
           }}
         >
