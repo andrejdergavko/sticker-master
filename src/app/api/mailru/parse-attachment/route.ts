@@ -25,14 +25,19 @@ export async function POST(req: Request) {
     fileName,
     provider,
   }: ParseAttachmentArgsT = await req.json();
+  const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
   await downloadAttachment(letterSeq, bodyStructurePart, fileName);
 
-  if (!fse.pathExistsSync(`${ATTACHMENTS_FOLDER_PATH}/${fileName}`)) {
-    throw new Error('File not found');
+  if (!fse.pathExistsSync(filePath)) {
+    return NextResponse.json('Failed to download file', { status: 500 });
   }
 
-  const invoice = convertXlsToCsv(`${ATTACHMENTS_FOLDER_PATH}/${fileName}`);
+  const invoice = convertXlsToCsv(filePath);
+
+  if (!invoice) {
+    return NextResponse.json('Failed to convert file', { status: 500 });
+  }
 
   const assistantMessage = await chatgpt(
     getParseInvoicePrompt(provider, invoice)
@@ -41,7 +46,10 @@ export async function POST(req: Request) {
   const chatGPTResponse = JSON.parse(assistantMessage);
 
   if (!Array.isArray(chatGPTResponse)) {
-    throw new Error('Invalid ChatGPT response. Response is not an array');
+    return NextResponse.json(
+      'Invalid ChatGPT response. Response is not an array',
+      { status: 500 }
+    );
   }
 
   const products: IProduct[] = chatGPTResponse.map((product) => ({
