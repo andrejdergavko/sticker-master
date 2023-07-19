@@ -46,7 +46,7 @@ export async function POST(req: Request) {
 
   const products: IProduct[] = chatGPTResponse.map((product) => ({
     ...product,
-    uuid: uuidv4(),
+    id: uuidv4(),
   }));
 
   return NextResponse.json(products);

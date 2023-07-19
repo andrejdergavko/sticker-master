@@ -27,7 +27,7 @@ const FileLoadForm: FC = () => {
 
   const handleParseClick = async (): Promise<void> => {};
 
-  const handleRowsDelete = (uuidsToDelete: string[]): void => {};
+  const handleRowsDelete = (idsToDelete: string[]): void => {};
 
   return (
     <form onSubmit={handleSubmit}>

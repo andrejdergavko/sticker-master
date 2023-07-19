@@ -12,7 +12,7 @@ export interface IAttachment {
 }
 
 export interface IProduct {
-  uuid: string;
+  id: string;
   article?: string;
   productName: string;
   quantity: number;
