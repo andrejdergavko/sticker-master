@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { ATTACHMENTS_FOLDER_PATH } from '~lib/constants';
 import downloadAttachment from 'src/services/mailru/downloadAttachment';
-import { convertXlsToCsv } from '~utils/file-converters';
+import { convertFileToCsv } from '~utils/file-converters';
 import { chatgpt } from 'src/services/openai/apiReq';
 import { getParseInvoicePrompt } from 'src/services/openai/prompts';
 import { IProduct } from '~app-types/entities';
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     return NextResponse.json('Failed to download file', { status: 500 });
   }
 
-  const invoice = convertXlsToCsv(filePath);
+  const invoice = convertFileToCsv(filePath);
 
   if (!invoice) {
     return NextResponse.json('Failed to convert file', { status: 500 });
