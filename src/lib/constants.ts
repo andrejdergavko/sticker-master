@@ -1,3 +1,5 @@
+import { IProvider } from '~app-types/entities';
+
 import { Pages, Providers, Routes } from './enums';
 
 export const ATTACHMENTS_FOLDER_PATH = 'attachments/';
@@ -11,12 +13,6 @@ export const PAGE_NAMES_BY_ROUTE: { [key: string]: string } = {
   [Routes.print]: PAGE_NAMES[Pages.print],
   [Routes.fileSelection]: PAGE_NAMES[Pages.fileSelection],
 };
-
-interface IProvider {
-  id: Providers;
-  label: string;
-  email: string;
-}
 
 export const providers: {
   [key in Providers]: IProvider;
