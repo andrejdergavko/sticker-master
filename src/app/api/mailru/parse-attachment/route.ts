@@ -15,7 +15,7 @@ export type ParseAttachmentArgsT = {
   letterSeq: number;
   bodyStructurePart: string;
   fileName: string;
-  provider: string;
+  providerEmail: string;
 };
 
 export async function POST(req: Request) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     letterSeq,
     bodyStructurePart,
     fileName,
-    provider,
+    providerEmail,
   }: ParseAttachmentArgsT = await req.json();
   const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
   }
 
   const assistantMessage = await chatgpt(
-    getParseInvoicePrompt(provider, invoice)
+    getParseInvoicePrompt(providerEmail, invoice)
   );
 
   const chatGPTResponse = JSON.parse(assistantMessage);

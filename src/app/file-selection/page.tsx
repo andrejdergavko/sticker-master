@@ -25,13 +25,13 @@ export default function FileSelection() {
     },
   });
   const { attachments = [], isLoading } = useAttachments();
-  const [providerEmail, setProviderEmail] = useState('');
+  const [providerEmailFilter, setProviderEmailFilter] = useState('');
 
   const handleAttachmentParse = (attachment: IAttachment) => {
     parseAttachment({
       bodyStructurePart: attachment.bodyStructurePart,
       fileName: attachment.fileName,
-      provider: attachment.from.address,
+      providerEmail: attachment.from.address,
       letterSeq: attachment.letterSeq,
     });
   };
@@ -58,16 +58,16 @@ export default function FileSelection() {
               labelId="provider-select-label"
               id="provider-select"
               name="provider"
-              value={providerEmail}
+              value={providerEmailFilter}
               onChange={(e) => {
-                setProviderEmail(e.target.value);
+                setProviderEmailFilter(e.target.value);
               }}
             >
               <MenuItem key="all" value={''}>
                 Все
               </MenuItem>
-              {PROVIDER_OPTIONS.map(({ label, email }) => (
-                <MenuItem key={email} value={email}>
+              {PROVIDER_OPTIONS.map(({ id, label }) => (
+                <MenuItem key={id} value={id}>
                   {label}
                 </MenuItem>
               ))}
@@ -86,7 +86,7 @@ export default function FileSelection() {
             onParseClick={handleAttachmentParse}
             isParsing={isParsing}
             isLoading={isLoading}
-            filters={[{ id: Columns.emailAddress, value: providerEmail }]}
+            filters={[{ id: Columns.emailAddress, value: providerEmailFilter }]}
           />
         </div>
       </div>

@@ -7,9 +7,3 @@ export enum Routes {
   print = '/',
   fileSelection = '/file-selection',
 }
-
-export enum Providers {
-  almik = 'almik',
-  arclow = 'arclow',
-  andrei = 'andrei',
-}

@@ -19,9 +19,3 @@ export interface IProduct {
   price: number;
   amount: number;
 }
-
-export interface IProvider {
-  id: Providers;
-  label: string;
-  email: string;
-}
