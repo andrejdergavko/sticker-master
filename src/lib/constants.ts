@@ -30,29 +30,17 @@ export const ROUTE_TO_PAGE_NAME_MAP: { [key in Routes]: PageNames } = {
 // Provider
 
 export enum ProviderEmails {
-  ALMIK = 'almik@list.ru',
   ARCLOW = 'arclow@list.ru',
-  ANDREI = 'andrejdergavko@gmail.com',
 }
 
 export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
   {
-    [ProviderEmails.ALMIK]: 'Алмик',
     [ProviderEmails.ARCLOW]: 'Арклов',
-    [ProviderEmails.ANDREI]: 'Andrei Dergavko',
   };
 
 export const PROVIDER_OPTIONS = [
   {
-    id: ProviderEmails.ALMIK,
-    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ALMIK],
-  },
-  {
     id: ProviderEmails.ARCLOW,
     label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ARCLOW],
-  },
-  {
-    id: ProviderEmails.ANDREI,
-    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ANDREI],
   },
 ];
