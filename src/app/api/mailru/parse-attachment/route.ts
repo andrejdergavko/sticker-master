@@ -3,10 +3,10 @@ import fse from 'fs-extra';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ATTACHMENTS_FOLDER_PATH } from '~lib/constants';
-import downloadAttachment from '~lib/mailru/downloadAttachment';
+import downloadAttachment from 'src/services/mailru/downloadAttachment';
 import { convertXlsToCsv } from '~utils/file-converters';
-import { chatgpt } from '~lib/openai/apiReq';
-import { getParseInvoicePrompt } from '~lib/openai/prompts';
+import { chatgpt } from 'src/services/openai/apiReq';
+import { getParseInvoicePrompt } from 'src/services/openai/prompts';
 import { IProduct } from '~app-types/entities';
 
 export const dynamic = 'force-dynamic';

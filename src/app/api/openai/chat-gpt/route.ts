@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { chatgpt } from '~lib/openai/apiReq';
+import { chatgpt } from 'src/services/openai/apiReq';
 
 export const dynamic = 'force-dynamic';
 

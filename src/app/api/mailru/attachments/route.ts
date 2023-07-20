@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getAttachments } from '~lib/mailru/getAttachments';
+import { getAttachments } from 'src/services/mailru/getAttachments';
 
 export const dynamic = 'force-dynamic';
 

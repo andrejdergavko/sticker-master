@@ -6,8 +6,8 @@ import { IAttachment } from '~app-types/entities';
 import { getMassageAttachments } from './utils';
 
 export const getAttachments = async (
-  userEmail: string = 'andrej94@list.ru',
-  password: string = 'tjE4rYU5kjvRLsdb8fDQ',
+  userEmail: string = process.env.USER_EMAIL as string,
+  password: string = process.env.USER_PASSWORD as string,
   sinceDays: number = 30
 ) => {
   const client = new ImapFlow({
