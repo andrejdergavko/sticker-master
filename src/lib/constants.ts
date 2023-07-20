@@ -30,12 +30,12 @@ export const ROUTE_TO_PAGE_NAME_MAP: { [key in Routes]: PageNames } = {
 // Provider
 
 export enum ProviderEmails {
-  ARCLOW = 'arclow@list.ru',
+  ARCLOW = 'zakaz@ussrauto.by',
 }
 
 export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
   {
-    [ProviderEmails.ARCLOW]: 'Арклов',
+    [ProviderEmails.ARCLOW]: 'Эквипмент Рент Инвестмент',
   };
 
 export const PROVIDER_OPTIONS = [
