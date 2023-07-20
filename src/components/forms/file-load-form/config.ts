@@ -2,13 +2,13 @@ import * as yup from 'yup';
 
 import type { IProduct } from '~app-types/entities';
 
-export interface IValues {
+export type ValuesT = {
   provider: string;
   file?: File;
   products: IProduct[];
-}
+};
 
-export const initialValues: IValues = {
+export const initialValues: ValuesT = {
   provider: '',
   file: undefined,
   products: [],

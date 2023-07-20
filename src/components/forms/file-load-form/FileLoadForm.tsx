@@ -8,7 +8,7 @@ import { Button } from '~components/ui/Button';
 import { FormControl } from '~components/ui/FormControl';
 import { PROVIDER_OPTIONS } from '~lib/constants';
 
-import { initialValues, validationSchema, type IValues } from './config';
+import { initialValues, validationSchema, type ValuesT } from './config';
 
 const FileLoadForm: FC = () => {
   const {
@@ -18,7 +18,7 @@ const FileLoadForm: FC = () => {
     handleChange,
     validateForm,
     errors,
-  } = useFormik<IValues>({
+  } = useFormik<ValuesT>({
     validateOnChange: false,
     initialValues,
     validationSchema,

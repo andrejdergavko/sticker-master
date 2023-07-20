@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '~components/ui/Button';
 import { TextField } from '~components/ui/Input';
 
-type EditableQuantityCellPropsT = {
+type EditableQuantityCellProps = {
   quantity: number;
   onChange: (value: number) => void;
 };
 
-const EditableQuantityCell: FC<EditableQuantityCellPropsT> = ({
+const EditableQuantityCell: FC<EditableQuantityCellProps> = ({
   quantity,
   onChange,
 }) => {

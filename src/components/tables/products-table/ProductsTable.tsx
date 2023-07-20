@@ -8,13 +8,13 @@ import { IProduct } from '~app-types/entities';
 
 import EditableQuantityCell from '../cell-renderers/EditableQuantityCell';
 
-type ProductsTablePropsT = {
+type ProductsTableProps = {
   data: IProduct[];
   onDelete: (rowIds: string[]) => void;
   onEdit: (rowId: string, newValues: Partial<IProduct>) => void;
 };
 
-const ProductsTable: FC<ProductsTablePropsT> = ({ data, onDelete, onEdit }) => {
+const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
   const columns: MRT_ColumnDef<IProduct>[] = [
     {
       accessorKey: 'article',
