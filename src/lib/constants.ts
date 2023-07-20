@@ -12,26 +12,30 @@ export const PAGE_NAMES_BY_ROUTE: { [key: string]: string } = {
   [Routes.fileSelection]: PAGE_NAMES[Pages.fileSelection],
 };
 
-export const PROVIDER_LABELS = {
-  [Providers.almik]: 'Алмик',
-  [Providers.arclow]: 'Арклов',
-  [Providers.andrei]: 'Andrei Dergavko',
-};
+interface IProvider {
+  id: Providers;
+  label: string;
+  email: string;
+}
 
-export const PROVIDER_OPTIONS = [
-  {
+export const providers: {
+  [key in Providers]: IProvider;
+} = {
+  [Providers.almik]: {
     id: Providers.almik,
-    label: PROVIDER_LABELS[Providers.almik],
+    label: 'Алмик',
     email: 'almik@list.ru',
   },
-  {
+  [Providers.arclow]: {
     id: Providers.arclow,
-    label: PROVIDER_LABELS[Providers.arclow],
+    label: 'Арклов',
     email: 'arclow@list.ru',
   },
-  {
+  [Providers.andrei]: {
     id: Providers.andrei,
-    label: PROVIDER_LABELS[Providers.andrei],
+    label: 'Andrei Dergavko',
     email: 'andrejdergavko@gmail.com',
   },
-];
+};
+
+export const PROVIDER_OPTIONS = Object.values(providers);
