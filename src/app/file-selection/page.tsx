@@ -7,12 +7,11 @@ import FilesTable from '~components/tables/files-table/FilesTable';
 import { Columns } from '~components/tables/files-table/config';
 import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
-import { PROVIDER_OPTIONS } from '~lib/constants';
+import { PROVIDER_OPTIONS, Routes } from '~lib/constants';
 import useAttachments from '~lib/hooks/useAttachments';
 import useParseAttachment from '~lib/hooks/useParseAttachment';
 import { IAttachment } from '~app-types/entities';
 import { useProductsStore } from '~store/products';
-import { Routes } from '~lib/enums';
 
 export default function FileSelection() {
   const router = useRouter();
@@ -21,7 +20,7 @@ export default function FileSelection() {
   const { parseAttachment, isParsing } = useParseAttachment({
     onSuccess(data) {
       setProducts(data);
-      router.push(Routes.print);
+      router.push(Routes.PRINT);
     },
   });
   const { attachments = [], isLoading } = useAttachments();

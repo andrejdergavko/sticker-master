@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Routes } from '~lib/enums';
+import { Routes } from '~lib/constants';
 
 type MenuItem = {
   label: string;
@@ -22,12 +22,12 @@ const MENU_ITEMS: MenuItem[] = [
   {
     label: 'Печать',
     icon: faPrint,
-    href: Routes.print,
+    href: Routes.PRINT,
   },
   {
     label: 'Выбор файла',
     icon: faFile,
-    href: Routes.fileSelection,
+    href: Routes.FILE_SELECTION,
   },
 ];
 
