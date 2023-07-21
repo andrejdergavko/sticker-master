@@ -31,16 +31,22 @@ export const ROUTE_TO_PAGE_NAME_MAP: { [key in Routes]: PageNames } = {
 
 export enum ProviderEmails {
   ARCLOW = 'zakaz@ussrauto.by',
+  USSRAUTO = 'info@ussrauto.by',
 }
 
 export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
   {
     [ProviderEmails.ARCLOW]: 'Эквипмент Рент Инвестмент',
+    [ProviderEmails.USSRAUTO]: 'USSRAUTO',
   };
 
 export const PROVIDER_OPTIONS = [
   {
     id: ProviderEmails.ARCLOW,
     label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ARCLOW],
+  },
+  {
+    id: ProviderEmails.USSRAUTO,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.USSRAUTO],
   },
 ];

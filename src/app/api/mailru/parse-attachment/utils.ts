@@ -9,6 +9,10 @@ import {
   getDefaultPrompt,
   defaultProductsToAppProducts,
 } from '~lib/providers/default';
+import {
+  getUssrautoPrompt,
+  ussrautoProductsToAppProducts,
+} from '~lib/providers/ussrauto';
 
 const getAppProducts = (
   providerProducts: any,
@@ -17,6 +21,9 @@ const getAppProducts = (
   if (providerEmail === ProviderEmails.ARCLOW) {
     return arclowProductsToAppProducts(providerProducts);
   }
+  if (providerEmail === ProviderEmails.USSRAUTO) {
+    return ussrautoProductsToAppProducts(providerProducts);
+  }
 
   return defaultProductsToAppProducts(providerProducts);
 };
@@ -24,6 +31,10 @@ const getAppProducts = (
 const getParseInvoicePrompt = (providerEmail: string, invoice: string) => {
   if (providerEmail === ProviderEmails.ARCLOW) {
     return getArclowPrompt(invoice);
+  }
+
+  if (providerEmail === ProviderEmails.USSRAUTO) {
+    return getUssrautoPrompt(invoice);
   }
 
   return getDefaultPrompt(invoice);

@@ -18,7 +18,7 @@ export const convertFileToString = (path: string): string => {
 };
 
 export const convertXlsToCsv = (path: string): string => {
-  const xlsFile = xlsx.readFile(path);
+  const xlsFile = xlsx.readFile(path, { codepage: 1251 });
   const sheetValue = xlsFile.Sheets[xlsFile.SheetNames[0]];
   return xlsx.utils.sheet_to_csv(sheetValue);
 };
