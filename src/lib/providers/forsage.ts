@@ -2,8 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { IProduct } from '~app-types/entities';
 
-interface IDefaultProduct {
-  id: string;
+interface IForsageProduct {
   article: string;
   productName: string;
   quantity: number;
@@ -11,8 +10,8 @@ interface IDefaultProduct {
   amount: number;
 }
 
-export const getDefaultPrompt = (invoice: string) => {
-  const exampleJson = [
+export const getForsagePrompt = (invoice: string) => {
+  const exampleJson: IForsageProduct[] = [
     {
       article: 'FK-24807818MPB',
       productName: 'Головка-бита SPLINE ударная M18,1/2',
@@ -24,11 +23,11 @@ export const getDefaultPrompt = (invoice: string) => {
 
   return `I have an invoice in csv format. Extract the commodity items from it and return them in JSON format.
     Your message should only contain JSON, no words. This JSON mast be read by JSON.parse method. Each product mast have the following fields: 
-    * article - product catalog number
-    * productName - product name
-    * quantity - quantity of products
-    * price - product price
-    * amount - product amount
+    * article - product catalog number (data is in the "Артикул" column)
+    * productName - product name (data is in the "Наименование товара" column)
+    * quantity - quantity of products (data is in the "Кол-во" column)
+    * price - product price (data is in the "Цена" column)
+    * amount - product amount (data is in the "Сумма" column)
     
     Example json: ${JSON.stringify(exampleJson)}
      
@@ -37,11 +36,11 @@ export const getDefaultPrompt = (invoice: string) => {
       ${invoice}`;
 };
 
-export const defaultProductsToAppProducts = (
-  defaultProduct: IDefaultProduct[]
+export const forsageProductsToAppProducts = (
+  forsageProducts: IForsageProduct[]
 ): IProduct[] => {
-  return defaultProduct.map((defaultProduct) => ({
-    ...defaultProduct,
+  return forsageProducts.map((forsageProduct) => ({
+    ...forsageProduct,
     id: uuidv4(),
   }));
 };

@@ -13,6 +13,10 @@ import {
   getUssrautoPrompt,
   ussrautoProductsToAppProducts,
 } from '~lib/providers/ussrauto';
+import {
+  forsageProductsToAppProducts,
+  getForsagePrompt,
+} from '~lib/providers/forsage';
 
 const getAppProducts = (
   providerProducts: any,
@@ -24,6 +28,9 @@ const getAppProducts = (
   if (providerEmail === ProviderEmails.USSRAUTO) {
     return ussrautoProductsToAppProducts(providerProducts);
   }
+  if (providerEmail === ProviderEmails.FORSAGE) {
+    return forsageProductsToAppProducts(providerProducts);
+  }
 
   return defaultProductsToAppProducts(providerProducts);
 };
@@ -32,9 +39,11 @@ const getParseInvoicePrompt = (providerEmail: string, invoice: string) => {
   if (providerEmail === ProviderEmails.ARCLOW) {
     return getArclowPrompt(invoice);
   }
-
   if (providerEmail === ProviderEmails.USSRAUTO) {
     return getUssrautoPrompt(invoice);
+  }
+  if (providerEmail === ProviderEmails.FORSAGE) {
+    return getForsagePrompt(invoice);
   }
 
   return getDefaultPrompt(invoice);
