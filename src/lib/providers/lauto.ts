@@ -22,7 +22,9 @@ export const getLautoPrompt = (invoice: string) => {
   ];
 
   return `I have an invoice in csv format. Extract the commodity items from it and return them in JSON format.
-    Your message should only contain JSON, no words. This JSON mast be read by JSON.parse method. Each product mast have the following fields: 
+    Your message should only contain JSON, no words. This JSON mast be read by JSON.parse method in node.
+    If the product name has quotation marks, add / in front of it.
+    Each product mast have the following fields: 
     * article - product catalog number (data is in the "Артикул" column)
     * productName - product name (data is in the "Наименование" column)
     * quantity - quantity of products (data is in the "Количество" column)

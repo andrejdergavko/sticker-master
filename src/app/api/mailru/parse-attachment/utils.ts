@@ -25,6 +25,10 @@ import {
   lautoProductsToAppProducts,
   getLautoPrompt,
 } from '~lib/providers/lauto';
+import {
+  almikProductsToAppProducts,
+  getAlmikPrompt,
+} from '~lib/providers/almik';
 
 const getAppProducts = (
   providerProducts: any,
@@ -44,6 +48,9 @@ const getAppProducts = (
   }
   if (providerEmail === ProviderEmails.LAUTO) {
     return lautoProductsToAppProducts(providerProducts);
+  }
+  if (providerEmail === ProviderEmails.ALMIK) {
+    return almikProductsToAppProducts(providerProducts);
   }
 
   return defaultProductsToAppProducts(providerProducts);
@@ -65,6 +72,9 @@ const getParseInvoicePrompt = (providerEmail: string, invoice: string) => {
   if (providerEmail === ProviderEmails.LAUTO) {
     return getLautoPrompt(invoice);
   }
+  if (providerEmail === ProviderEmails.ALMIK) {
+    return getAlmikPrompt(invoice);
+  }
 
   return getDefaultPrompt(invoice);
 };
@@ -75,7 +85,12 @@ export const getProductsFromInvoice = async (
 ) => {
   const prompt = getParseInvoicePrompt(providerEmail, invoice);
   const assistantMessage = await chatgpt(prompt);
+
+  console.log('assistantMessage', assistantMessage); // <--
+
   const providerProducts = JSON.parse(assistantMessage);
+
+  console.log('providerProducts', providerProducts); // <--
 
   return getAppProducts(providerProducts, providerEmail);
 };
