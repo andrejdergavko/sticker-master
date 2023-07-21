@@ -17,6 +17,10 @@ import {
   forsageProductsToAppProducts,
   getForsagePrompt,
 } from '~lib/providers/forsage';
+import {
+  bugautohitProductsToAppProducts,
+  getBugautohitPrompt,
+} from '~lib/providers/bugautohit';
 
 const getAppProducts = (
   providerProducts: any,
@@ -31,6 +35,9 @@ const getAppProducts = (
   if (providerEmail === ProviderEmails.FORSAGE) {
     return forsageProductsToAppProducts(providerProducts);
   }
+  if (providerEmail === ProviderEmails.BUGAUTOHIT) {
+    return bugautohitProductsToAppProducts(providerProducts);
+  }
 
   return defaultProductsToAppProducts(providerProducts);
 };
@@ -44,6 +51,9 @@ const getParseInvoicePrompt = (providerEmail: string, invoice: string) => {
   }
   if (providerEmail === ProviderEmails.FORSAGE) {
     return getForsagePrompt(invoice);
+  }
+  if (providerEmail === ProviderEmails.BUGAUTOHIT) {
+    return getBugautohitPrompt(invoice);
   }
 
   return getDefaultPrompt(invoice);
