@@ -34,6 +34,7 @@ export enum ProviderEmails {
   USSRAUTO = 'info@ussrauto.by',
   FORSAGE = 'opt@th-tool.by',
   BUGAUTOHIT = '5222249@mail.ru',
+  LAUTO = 'report@l-auto.by',
 }
 
 export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
@@ -42,6 +43,7 @@ export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
     [ProviderEmails.USSRAUTO]: 'USSRAUTO',
     [ProviderEmails.FORSAGE]: 'Форсаж',
     [ProviderEmails.BUGAUTOHIT]: 'БугАвтоХит',
+    [ProviderEmails.LAUTO]: 'L-AUTO',
   };
 
 export const PROVIDER_OPTIONS: { id: ProviderEmails; label: string }[] = [
@@ -60,5 +62,9 @@ export const PROVIDER_OPTIONS: { id: ProviderEmails; label: string }[] = [
   {
     id: ProviderEmails.BUGAUTOHIT,
     label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.BUGAUTOHIT],
+  },
+  {
+    id: ProviderEmails.LAUTO,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.LAUTO],
   },
 ];

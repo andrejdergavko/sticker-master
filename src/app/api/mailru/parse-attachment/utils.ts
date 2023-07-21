@@ -21,6 +21,10 @@ import {
   bugautohitProductsToAppProducts,
   getBugautohitPrompt,
 } from '~lib/providers/bugautohit';
+import {
+  lautoProductsToAppProducts,
+  getLautoPrompt,
+} from '~lib/providers/lauto';
 
 const getAppProducts = (
   providerProducts: any,
@@ -38,6 +42,9 @@ const getAppProducts = (
   if (providerEmail === ProviderEmails.BUGAUTOHIT) {
     return bugautohitProductsToAppProducts(providerProducts);
   }
+  if (providerEmail === ProviderEmails.LAUTO) {
+    return lautoProductsToAppProducts(providerProducts);
+  }
 
   return defaultProductsToAppProducts(providerProducts);
 };
@@ -54,6 +61,9 @@ const getParseInvoicePrompt = (providerEmail: string, invoice: string) => {
   }
   if (providerEmail === ProviderEmails.BUGAUTOHIT) {
     return getBugautohitPrompt(invoice);
+  }
+  if (providerEmail === ProviderEmails.LAUTO) {
+    return getLautoPrompt(invoice);
   }
 
   return getDefaultPrompt(invoice);
