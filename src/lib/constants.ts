@@ -1,4 +1,5 @@
 export const ATTACHMENTS_FOLDER_PATH = 'attachments/';
+export const SUPPORTED_FILE_FORMATS = ['xls', 'xlsx', 'csv'];
 
 //Routing
 

@@ -4,6 +4,8 @@ import { getDateBeforeDays } from '~utils/date';
 import { IAttachment } from '~app-types/entities';
 
 import { getMassageAttachments } from './utils';
+import { SUPPORTED_FILE_FORMATS } from '~lib/constants';
+import { getFileFormatFromPath } from '~utils/files';
 
 export const getAttachments = async (
   userEmail: string = process.env.USER_EMAIL as string,
@@ -38,12 +40,20 @@ export const getAttachments = async (
     )) {
       const attachments = getMassageAttachments(message);
 
-      attachments.forEach((attachment) => {
+      const allowedAttachments = attachments.filter((attachment) => {
+        // @ts-ignore not correct dispositionParameters field type in MessageStructureObject
+        const fileName = attachment.dispositionParameters.filename;
+        return SUPPORTED_FILE_FORMATS.includes(
+          getFileFormatFromPath(fileName) || ''
+        );
+      });
+
+      allowedAttachments.forEach((attachment) => {
         result.push({
           id: attachment.id,
           // @ts-ignore
           from: message.envelope.from[0],
-          // @ts-ignore not correct dispositionParameters field type in MessageStructureObject
+          // @ts-ignore
           fileName: attachment.dispositionParameters.filename,
           // @ts-ignore not correct internalDate field type in MessageStructureObject
           date: message.internalDate,
