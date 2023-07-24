@@ -1,4 +1,5 @@
 import { ImapFlow } from 'imapflow'; //doc for imapflow https://imapflow.com/module-imapflow-ImapFlow.html
+import { v4 as uuidv4 } from 'uuid';
 
 import { getDateBeforeDays } from '~utils/date';
 import { IAttachment } from '~app-types/entities';
@@ -50,7 +51,7 @@ export const getAttachments = async (
 
       allowedAttachments.forEach((attachment) => {
         result.push({
-          id: attachment.id,
+          id: uuidv4(),
           // @ts-ignore
           from: message.envelope.from[0],
           // @ts-ignore
