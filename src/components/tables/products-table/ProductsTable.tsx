@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '~components/ui/Button';
 import { IProduct } from '~app-types/entities';
 
-import EditableQuantityCell from '../cell-renderers/EditableQuantityCell';
+import EditableNumberCell from '../cell-renderers/EditableNumberCell';
 
 type ProductsTableProps = {
   data: IProduct[];
@@ -32,8 +32,8 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
       maxSize: 100,
       Cell({ cell }) {
         return (
-          <EditableQuantityCell
-            quantity={cell.getValue<number>()}
+          <EditableNumberCell
+            value={cell.getValue<number>()}
             onChange={(newValue) => {
               onEdit(cell.row.original.id, { quantity: newValue });
             }}
@@ -45,6 +45,16 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
       accessorKey: 'price',
       header: 'Цена',
       maxSize: 60,
+      Cell({ cell }) {
+        return (
+          <EditableNumberCell
+            value={cell.getValue<number>()}
+            onChange={(newValue) => {
+              onEdit(cell.row.original.id, { price: newValue });
+            }}
+          />
+        );
+      },
     },
     {
       accessorKey: 'amount',
