@@ -5,26 +5,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '~components/ui/Button';
 import { TextField } from '~components/ui/Input';
 
-type EditableQuantityCellPropsT = {
-  quantity: number;
+type EditableNumberCellProps = {
+  value: number;
   onChange: (value: number) => void;
 };
 
-const EditableQuantityCell: FC<EditableQuantityCellPropsT> = ({
-  quantity,
+const EditableNumberCell: FC<EditableNumberCellProps> = ({
+  value,
   onChange,
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [newQuantity, setNewQuantity] = useState(quantity);
+  const [newValue, setNewValue] = useState(value);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onChange(newQuantity);
+    onChange(newValue);
     setIsEditMode(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewQuantity(Number(e.target.value));
+    setNewValue(Number(e.target.value));
   };
 
   if (isEditMode) {
@@ -34,9 +34,9 @@ const EditableQuantityCell: FC<EditableQuantityCellPropsT> = ({
           <TextField
             className="w-20 h-7"
             classes={{ input: 'p-0' }}
-            type="number"
             size="small"
-            value={newQuantity}
+            type="number"
+            value={newValue}
             onChange={handleInputChange}
             autoFocus
           />
@@ -58,7 +58,7 @@ const EditableQuantityCell: FC<EditableQuantityCellPropsT> = ({
 
   return (
     <div>
-      {quantity}
+      {value}
       <Button
         className="mx-2 normal-case"
         onClick={(e) => {
@@ -74,4 +74,4 @@ const EditableQuantityCell: FC<EditableQuantityCellPropsT> = ({
   );
 };
 
-export default EditableQuantityCell;
+export default EditableNumberCell;

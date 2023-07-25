@@ -7,12 +7,11 @@ import FilesTable from '~components/tables/files-table/FilesTable';
 import { Columns } from '~components/tables/files-table/config';
 import { FormControl } from '~components/ui/FormControl';
 import Select, { MenuItem } from '~components/ui/Select';
-import { PROVIDER_OPTIONS } from '~lib/constants';
+import { PROVIDER_OPTIONS, Routes } from '~lib/constants';
 import useAttachments from '~lib/hooks/useAttachments';
 import useParseAttachment from '~lib/hooks/useParseAttachment';
 import { IAttachment } from '~app-types/entities';
 import { useProductsStore } from '~store/products';
-import { Routes } from '~lib/enums';
 
 export default function FileSelection() {
   const router = useRouter();
@@ -21,17 +20,17 @@ export default function FileSelection() {
   const { parseAttachment, isParsing } = useParseAttachment({
     onSuccess(data) {
       setProducts(data);
-      router.push(Routes.print);
+      router.push(Routes.PRINT);
     },
   });
   const { attachments = [], isLoading } = useAttachments();
-  const [providerEmail, setProviderEmail] = useState('');
+  const [providerEmailFilter, setProviderEmailFilter] = useState('');
 
   const handleAttachmentParse = (attachment: IAttachment) => {
     parseAttachment({
       bodyStructurePart: attachment.bodyStructurePart,
       fileName: attachment.fileName,
-      provider: attachment.from.address,
+      providerEmail: attachment.from.address,
       letterSeq: attachment.letterSeq,
     });
   };
@@ -58,16 +57,16 @@ export default function FileSelection() {
               labelId="provider-select-label"
               id="provider-select"
               name="provider"
-              value={providerEmail}
+              value={providerEmailFilter}
               onChange={(e) => {
-                setProviderEmail(e.target.value);
+                setProviderEmailFilter(e.target.value);
               }}
             >
               <MenuItem key="all" value={''}>
                 Все
               </MenuItem>
-              {PROVIDER_OPTIONS.map(({ label, email }) => (
-                <MenuItem key={email} value={email}>
+              {PROVIDER_OPTIONS.map(({ id, label }) => (
+                <MenuItem key={id} value={id}>
                   {label}
                 </MenuItem>
               ))}
@@ -86,7 +85,7 @@ export default function FileSelection() {
             onParseClick={handleAttachmentParse}
             isParsing={isParsing}
             isLoading={isLoading}
-            filters={[{ id: Columns.emailAddress, value: providerEmail }]}
+            filters={[{ id: Columns.emailAddress, value: providerEmailFilter }]}
           />
         </div>
       </div>

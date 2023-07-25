@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 
 // import { useSession, signOut } from 'next-auth/react';
 
-import { PAGE_NAMES_BY_ROUTE } from '~lib/constants';
+import { ROUTE_TO_PAGE_NAME_MAP, Routes } from '~lib/constants';
 import { Button } from '~components/ui/Button';
 
 const Header: FC = () => {
-  const pathname = usePathname();
+  const pathname = usePathname() as Routes;
 
   // const { data } = useSession();
   // const user = data?.user;
@@ -18,7 +18,7 @@ const Header: FC = () => {
     <div className="w-full pb-[370px] bg-slate-700">
       <div className=" py-6 px-14 flex justify-between items-center">
         <div className="uppercase font-bold text-slate-50 text-sm">
-          {PAGE_NAMES_BY_ROUTE[pathname]}
+          {ROUTE_TO_PAGE_NAME_MAP[pathname]}
         </div>
 
         <div className="flex">

@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-type DateCellPropsT = {
+type DateCellProps = {
   date?: string;
 };
 
-const DateCell: FC<DateCellPropsT> = ({ date }) => {
+const DateCell: FC<DateCellProps> = ({ date }) => {
   return (
     <div>
       {date &&

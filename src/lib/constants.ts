@@ -1,37 +1,77 @@
-import { Pages, Providers, Routes } from './enums';
-
 export const ATTACHMENTS_FOLDER_PATH = 'attachments/';
+export const SUPPORTED_FILE_FORMATS = ['xls', 'xlsx', 'csv'];
 
-export const PAGE_NAMES: { [key in Pages]: string } = {
-  [Pages.print]: 'Печать',
-  [Pages.fileSelection]: 'Выбор файла',
+//Routing
+
+export enum Pages {
+  PRINT = 'print',
+  FILE_SELECTION = 'fileSelection',
+}
+
+export enum Routes {
+  PRINT = '/',
+  FILE_SELECTION = '/file-selection',
+}
+
+export enum PageNames {
+  PRINT = 'Печать',
+  FILE_SELECTION = 'Выбор файла',
+}
+
+export const PAGE_TO_ROUTE_MAP: { [key in Pages]: Routes } = {
+  [Pages.PRINT]: Routes.PRINT,
+  [Pages.FILE_SELECTION]: Routes.FILE_SELECTION,
 };
 
-export const PAGE_NAMES_BY_ROUTE: { [key: string]: string } = {
-  [Routes.print]: PAGE_NAMES[Pages.print],
-  [Routes.fileSelection]: PAGE_NAMES[Pages.fileSelection],
+export const ROUTE_TO_PAGE_NAME_MAP: { [key in Routes]: PageNames } = {
+  [Routes.PRINT]: PageNames.PRINT,
+  [Routes.FILE_SELECTION]: PageNames.FILE_SELECTION,
 };
 
-export const PROVIDER_LABELS = {
-  [Providers.almik]: 'Алмик',
-  [Providers.arclow]: 'Арклов',
-  [Providers.andrei]: 'Andrei Dergavko',
-};
+// Provider
 
-export const PROVIDER_OPTIONS = [
+export enum ProviderEmails {
+  ARCLOW = 'zakaz@ussrauto.by',
+  USSRAUTO = 'info@ussrauto.by',
+  FORSAGE = 'opt@th-tool.by',
+  BUGAUTOHIT = '5222249@mail.ru',
+  LAUTO = 'report@l-auto.by',
+  ALMIK = 'almikauto@mail.ru',
+}
+
+export const PROVIDER_EMAIL_TO_LABEL_MAP: { [key in ProviderEmails]: string } =
   {
-    id: Providers.almik,
-    label: PROVIDER_LABELS[Providers.almik],
-    email: 'almik@list.ru',
+    [ProviderEmails.ARCLOW]: 'Эквипмент Рент Инвестмент',
+    [ProviderEmails.USSRAUTO]: 'USSRAUTO',
+    [ProviderEmails.FORSAGE]: 'Форсаж',
+    [ProviderEmails.BUGAUTOHIT]: 'БугАвтоХит',
+    [ProviderEmails.LAUTO]: 'L-AUTO',
+    [ProviderEmails.ALMIK]: 'Алмик',
+  };
+
+export const PROVIDER_OPTIONS: { id: ProviderEmails; label: string }[] = [
+  {
+    id: ProviderEmails.ARCLOW,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ARCLOW],
   },
   {
-    id: Providers.arclow,
-    label: PROVIDER_LABELS[Providers.arclow],
-    email: 'arclow@list.ru',
+    id: ProviderEmails.USSRAUTO,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.USSRAUTO],
   },
   {
-    id: Providers.andrei,
-    label: PROVIDER_LABELS[Providers.andrei],
-    email: 'andrejdergavko@gmail.com',
+    id: ProviderEmails.FORSAGE,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.FORSAGE],
+  },
+  {
+    id: ProviderEmails.BUGAUTOHIT,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.BUGAUTOHIT],
+  },
+  {
+    id: ProviderEmails.LAUTO,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.LAUTO],
+  },
+  {
+    id: ProviderEmails.ALMIK,
+    label: PROVIDER_EMAIL_TO_LABEL_MAP[ProviderEmails.ALMIK],
   },
 ];

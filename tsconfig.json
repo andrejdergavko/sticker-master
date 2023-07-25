@@ -26,7 +26,8 @@
       "~store/*": ["src/store/*"],
       "~app-types/*": ["src/types/*"],
       "~utils/*": ["src/utils/*"],
-      "~api/*": ["src/app/api/*"]
+      "~api/*": ["src/app/api/*"],
+      "~services/*": ["src/services/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

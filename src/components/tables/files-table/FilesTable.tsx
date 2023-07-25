@@ -11,13 +11,13 @@ import { IAttachment } from '~app-types/entities';
 
 import { columns } from './config';
 
-interface FilesTableProps {
+type FilesTableProps = {
   data: IAttachment[];
   onParseClick: (attachment: IAttachment) => void;
   isLoading?: boolean;
   isParsing?: boolean;
   filters?: MRT_ColumnFiltersState;
-}
+};
 
 const FilesTable: FC<FilesTableProps> = ({
   data,

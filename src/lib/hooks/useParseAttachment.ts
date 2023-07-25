@@ -27,8 +27,8 @@ const useParseAttachment = (
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error?.message);
+        const errorMessage = await res.json();
+        throw new Error(errorMessage);
       }
 
       return await res.json();
