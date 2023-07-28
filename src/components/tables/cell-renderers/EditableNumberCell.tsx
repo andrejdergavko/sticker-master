@@ -34,6 +34,7 @@ const EditableNumberCell: FC<EditableNumberCellProps> = ({
           <TextField
             className="w-20 h-7"
             classes={{ input: 'p-0' }}
+            inputProps={{ step: 'any' }}
             size="small"
             type="number"
             value={newValue}
