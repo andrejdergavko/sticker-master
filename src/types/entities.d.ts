@@ -9,6 +9,7 @@ export interface IAttachment {
   bodyStructurePart: string;
   letterUid: number;
   letterSeq: number;
+  messageSubject: string;
 }
 
 export interface IProduct {

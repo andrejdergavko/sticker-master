@@ -7,6 +7,7 @@ import DateCell from '../cell-renderers/DateCell';
 export enum Columns {
   name = 'name',
   emailAddress = 'email-address',
+  messageSubject = 'message-subject',
   date = 'date',
   fileName = 'file-name',
 }
@@ -16,12 +17,16 @@ export const columns: MRT_ColumnDef<IAttachment>[] = [
     id: Columns.name,
     accessorKey: 'from.name',
     header: 'Отправитель',
-    minSize: 300,
   },
   {
     id: Columns.emailAddress,
     accessorKey: 'from.address',
     header: 'Адрес',
+  },
+  {
+    id: Columns.messageSubject,
+    accessorKey: 'messageSubject',
+    header: 'Тема письма',
   },
   {
     id: Columns.date,

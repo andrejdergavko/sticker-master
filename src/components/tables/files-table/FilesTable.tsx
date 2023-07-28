@@ -46,7 +46,6 @@ const FilesTable: FC<FilesTableProps> = ({
       enableHiding={false}
       enableColumnActions={false}
       initialState={{
-        density: 'comfortable',
         sorting: [{ id: 'date', desc: true }],
         pagination: { pageSize: 50, pageIndex: 0 },
       }}
