@@ -85,12 +85,6 @@ export const getProductsFromInvoice = async (
 ) => {
   const prompt = getParseInvoicePrompt(providerEmail, invoice);
   const assistantMessage = await chatgpt(prompt);
-
-  console.log('assistantMessage', assistantMessage); // <--
-
   const providerProducts = JSON.parse(assistantMessage);
-
-  console.log('providerProducts', providerProducts); // <--
-
   return getAppProducts(providerProducts, providerEmail);
 };

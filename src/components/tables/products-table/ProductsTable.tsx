@@ -19,17 +19,17 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
     {
       accessorKey: 'article',
       header: 'Артикул',
-      minSize: 150,
+      maxSize: 200,
     },
     {
       accessorKey: 'productName',
       header: 'Название',
-      minSize: 310,
+      minSize: 400,
     },
     {
       accessorKey: 'quantity',
       header: 'Количество',
-      maxSize: 100,
+      size: 190,
       Cell({ cell }) {
         return (
           <EditableNumberCell
@@ -44,7 +44,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
     {
       accessorKey: 'price',
       header: 'Цена',
-      maxSize: 60,
+      size: 190,
       Cell({ cell }) {
         return (
           <EditableNumberCell
@@ -56,15 +56,11 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
         );
       },
     },
-    {
-      accessorKey: 'amount',
-      header: 'Сумма',
-      maxSize: 66,
-    },
   ];
 
   return (
     <MaterialReactTable
+      layoutMode="grid"
       columns={columns}
       data={data}
       enableRowSelection
@@ -73,9 +69,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
       enableHiding={false}
       enableColumnActions={false}
       initialState={{
-        density: 'comfortable',
         pagination: { pageSize: 50, pageIndex: 0 },
-        // @ts-ignore problem in the material-react-table lib
         density: 'compact',
       }}
       positionToolbarAlertBanner="bottom"
@@ -83,6 +77,11 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
         onClick: row.getToggleSelectedHandler(),
         sx: { cursor: 'pointer' },
       })}
+      muiTableBodyCellProps={{
+        style: {
+          whiteSpace: 'normal',
+        },
+      }}
       //TopToolbarActions
       renderTopToolbarCustomActions={({ table }) => (
         <Button
@@ -110,10 +109,10 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
       displayColumnDefOptions={{
         'mrt-row-actions': {
           header: '',
-          muiTableHeadCellProps: {
-            align: 'left',
-          },
+          size: 70,
+          muiTableHeadCellProps: { align: 'left' },
         },
+        'mrt-row-select': { size: 40 },
       }}
       renderRowActions={({ table, row }) => (
         <Button
