@@ -17,7 +17,6 @@ export const columns: MRT_ColumnDef<IAttachment>[] = [
     accessorKey: 'from.name',
     header: 'Отправитель',
     minSize: 300,
-    maxSize: 10,
   },
   {
     id: Columns.emailAddress,
@@ -34,7 +33,5 @@ export const columns: MRT_ColumnDef<IAttachment>[] = [
     id: Columns.fileName,
     accessorKey: 'fileName',
     header: 'Имя файла',
-    // maxSize: 610,
-    // minSize: 300,
   },
 ];
