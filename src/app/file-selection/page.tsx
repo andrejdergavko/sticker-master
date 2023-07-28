@@ -36,7 +36,7 @@ export default function FileSelection() {
   };
 
   return (
-    <div className="mx-14 mb-14  bg-slate-200 rounded-xl overflow-hidden">
+    <div className="mx-10 mb-14  bg-slate-200 rounded-xl overflow-hidden">
       <div className="px-4 py-3 bg-slate-50 ">
         <h6 className="mx-4 text-lg font-medium">Выбор файла</h6>
       </div>

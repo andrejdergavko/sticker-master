@@ -16,7 +16,7 @@ const Header: FC = () => {
 
   return (
     <div className="w-full pb-[370px] bg-slate-700">
-      <div className=" py-6 px-14 flex justify-between items-center">
+      <div className=" py-6 px-10 flex justify-between items-center">
         <div className="uppercase font-bold text-slate-50 text-sm">
           {ROUTE_TO_PAGE_NAME_MAP[pathname]}
         </div>
