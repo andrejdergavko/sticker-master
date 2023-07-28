@@ -61,6 +61,7 @@ export const getAttachments = async (
           bodyStructurePart: attachment.part,
           letterUid: message.uid,
           letterSeq: message.seq,
+          messageSubject: message.envelope.subject,
         });
       });
     }
