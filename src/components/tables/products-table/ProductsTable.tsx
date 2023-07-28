@@ -43,7 +43,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
     },
     {
       accessorKey: 'price',
-      header: 'Цена',
+      header: 'Цена, BYN',
       size: 190,
       Cell({ cell }) {
         return (
