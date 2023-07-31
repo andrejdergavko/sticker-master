@@ -16,20 +16,24 @@ export type ParseAttachmentArgsT = {
 };
 
 export async function POST(req: Request) {
-  const {
-    letterSeq,
-    bodyStructurePart,
-    fileName,
-    providerEmail,
-  }: ParseAttachmentArgsT = await req.json();
+  try {
+    const {
+      letterSeq,
+      bodyStructurePart,
+      fileName,
+      providerEmail,
+    }: ParseAttachmentArgsT = await req.json();
 
-  const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
+    const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
-  await downloadAttachment(letterSeq, bodyStructurePart, fileName);
+    await downloadAttachment(letterSeq, bodyStructurePart, fileName);
 
-  const invoice: string = convertFileToString(filePath);
+    const invoice: string = convertFileToString(filePath);
 
-  const products = await getProductsFromInvoice(invoice, providerEmail);
+    const products = await getProductsFromInvoice(invoice, providerEmail);
 
-  return NextResponse.json(products);
+    return NextResponse.json(products);
+  } catch (e: any) {
+    return NextResponse.json(e?.message, { status: 500 });
+  }
 }

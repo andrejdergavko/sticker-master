@@ -3,18 +3,22 @@ import fs from 'fs';
 import iconv from 'iconv-lite';
 
 export const convertFileToString = (path: string): string => {
-  const extension = path.split('.').pop();
+  try {
+    const extension = path.split('.').pop();
 
-  if (extension === 'xls') {
-    return convertXlsToCsv(path);
+    if (extension === 'xls') {
+      return convertXlsToCsv(path);
+    }
+
+    if (extension === 'csv') {
+      const data = fs.readFileSync(path);
+      return iconv.decode(data, 'cp1251').toString();
+    }
+
+    return '';
+  } catch (error) {
+    throw new Error('An error occurred while converting the file');
   }
-
-  if (extension === 'csv') {
-    const data = fs.readFileSync(path);
-    return iconv.decode(data, 'cp1251').toString();
-  }
-
-  return '';
 };
 
 export const convertXlsToCsv = (path: string): string => {
