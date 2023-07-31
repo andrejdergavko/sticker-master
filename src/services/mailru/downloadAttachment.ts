@@ -30,6 +30,10 @@ const downloadAttachment = async (
       bodyStructurePart
     );
 
+    if (!content) {
+      throw new Error('Fail to find the file');
+    }
+
     const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
     if (!fse.existsSync(ATTACHMENTS_FOLDER_PATH)) {

@@ -12,9 +12,7 @@ export async function GET() {
   } catch (e) {
     return NextResponse.json(
       'An error occurred while fetching the attachments',
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }
