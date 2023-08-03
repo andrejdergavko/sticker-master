@@ -3,7 +3,7 @@ import { FC, memo, useEffect, useState } from 'react';
 import MaterialReactTable, {
   MRT_ColumnFiltersState,
 } from 'material-react-table';
-import { faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '~components/ui/Button';
@@ -70,7 +70,7 @@ const FilesTable: FC<FilesTableProps> = ({
             onParseClick(row.original);
           }}
         >
-          <FontAwesomeIcon icon={faPrint} size="lg" />
+          <FontAwesomeIcon icon={faCheck} size="xl" />
         </Button>
       )}
       positionActionsColumn="last"
