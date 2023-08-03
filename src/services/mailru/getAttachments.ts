@@ -9,8 +9,8 @@ import { SUPPORTED_FILE_FORMATS } from '~lib/constants';
 import { getFileFormatFromPath } from '~utils/files';
 
 export const getAttachments = async (
-  userEmail: string = process.env.USER_EMAIL as string,
-  password: string = process.env.USER_PASSWORD as string,
+  email: string,
+  accessToken: string,
   sinceDays: number = 30
 ) => {
   const client = new ImapFlow({
@@ -19,8 +19,8 @@ export const getAttachments = async (
     secure: true,
     logger: false,
     auth: {
-      user: userEmail,
-      pass: password,
+      user: email,
+      accessToken,
     },
   });
 
