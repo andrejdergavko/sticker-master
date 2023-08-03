@@ -1,8 +1,8 @@
+'use client';
 import type { Metadata } from 'next';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-
-import Layout from '~components/common/Layout';
+import { SessionProvider } from 'next-auth/react';
 
 import '../styles/globals.css';
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Layout>{children}</Layout>
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );
