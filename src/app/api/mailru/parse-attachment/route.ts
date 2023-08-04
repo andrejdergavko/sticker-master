@@ -1,3 +1,4 @@
+import fse from 'fs-extra';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 
@@ -43,6 +44,8 @@ export async function POST(req: Request) {
     );
 
     const invoice: string = convertFileToString(filePath);
+
+    fse.emptyDirSync(ATTACHMENTS_FOLDER_PATH);
 
     const products = await getProductsFromInvoice(invoice, providerEmail);
 

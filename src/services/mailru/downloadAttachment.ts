@@ -31,7 +31,7 @@ const downloadAttachment = async (
     );
 
     if (!content) {
-      throw new Error('Fail to find the file');
+      throw new Error('File not found');
     }
 
     const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
