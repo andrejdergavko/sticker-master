@@ -8,10 +8,6 @@ import '../styles/globals.css';
 
 config.autoAddCss = false;
 
-export const metadata: Metadata = {
-  title: 'Sticker Master',
-};
-
 export default function RootLayout({
   children,
 }: {
