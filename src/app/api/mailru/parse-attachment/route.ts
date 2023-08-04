@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
 import { ATTACHMENTS_FOLDER_PATH } from '~lib/constants';
 import downloadAttachment from 'src/services/mailru/downloadAttachment';
 import { convertFileToString } from '~utils/file-converters';
+import { authOptions } from '~api/auth/[...nextauth]/route';
 
 import { getProductsFromInvoice } from './utils';
 
@@ -16,6 +18,12 @@ export type ParseAttachmentArgsT = {
 };
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user.email || !session.user.imapAccessToken) {
+    throw new Error('User is not authenticated.');
+  }
+
   try {
     const {
       letterSeq,
@@ -26,7 +34,13 @@ export async function POST(req: Request) {
 
     const filePath = `${ATTACHMENTS_FOLDER_PATH}/${fileName}`;
 
-    await downloadAttachment(letterSeq, bodyStructurePart, fileName);
+    await downloadAttachment(
+      letterSeq,
+      bodyStructurePart,
+      fileName,
+      session.user.email,
+      session.user.imapAccessToken
+    );
 
     const invoice: string = convertFileToString(filePath);
 
