@@ -19,7 +19,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ data, onDelete, onEdit }) => {
     {
       accessorKey: 'article',
       header: 'Артикул',
-      maxSize: 200,
+      maxSize: 201,
     },
     {
       accessorKey: 'productName',
