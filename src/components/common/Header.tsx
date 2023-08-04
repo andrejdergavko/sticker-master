@@ -1,16 +1,30 @@
 'use client';
+import React from 'react';
 import type { FC } from 'react';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 import { ROUTE_TO_PAGE_NAME_MAP, Routes } from '~lib/constants';
-import { Button } from '~components/ui/Button';
 
 const Header: FC = () => {
   const pathname = usePathname() as Routes;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const { data } = useSession();
   const user = data?.user;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className="w-full pb-[370px] bg-slate-700">
@@ -18,24 +32,33 @@ const Header: FC = () => {
         <div className="uppercase font-bold text-slate-50 text-sm">
           {ROUTE_TO_PAGE_NAME_MAP[pathname]}
         </div>
-        <div className="flex">
-          {user?.email}
-          <Button
-            className="mr-2 px-4 text-white normal-case"
-            variant="text"
-            size="medium"
-            onClick={() => signOut()}
+        <div className="flex items-center text-slate-200">
+          <div className="mr-3">{user?.email}</div>
+
+          <Tooltip title="Настройки аккаунта">
+            <IconButton className="p-0 m-0" onClick={handleClick} size="small">
+              <Avatar
+                alt="avatar"
+                className="w-10 h-10"
+                src={user?.image || '/no-avatar.jpg'}
+              />
+            </IconButton>
+          </Tooltip>
+
+          <Menu
+            id="account-settings-menu"
+            classes={{
+              paper:
+                'mt-2 rounded-lg shadow-md border border-solid border-slate-200',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            Sign out
-          </Button>
-          <Image
-            width={42}
-            height={42}
-            className="rounded-full relative"
-            src={user?.image || '/no-avatar.jpg'}
-            alt="Avatar"
-            style={{ objectFit: 'cover' }}
-          />
+            <MenuItem onClick={() => signOut()}>Выйти</MenuItem>
+          </Menu>
         </div>
       </div>
     </div>
